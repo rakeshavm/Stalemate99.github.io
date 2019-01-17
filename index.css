@@ -1,0 +1,14 @@
+html,body{
+    width:100%;
+    height:100%;
+}
+body{
+    background:url("./temp web-02.svg");
+}
+
+.moon{
+    position: absolute;
+    top:8%;
+    left:5%;
+    width: 10%;
+}
