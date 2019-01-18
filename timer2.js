@@ -1,35 +1,9 @@
 var TIMER= (function () {
-	var daydisp, hrdisp, mindisp, secdisp;
 	var current, destination,t;
-	var timer;
+	var clock;
 
 	function sel(d) {
 		return document.querySelector(d);
-	}
-
-	function doMath() {
-		return {
-			seconds: Math.floor((t / 1000) % 60),
-			minutes: Math.floor((t / 1000 / 60) % 60),
-			hours: Math.floor((t / (1000 * 60 * 60)) % 24),
-			days: Math.floor(t / (1000 * 60 * 60 * 24))
-		}
-	}
-
-	function render(genesis){
-		 daydisp.innerHTML=genesis.days+ "<br> Days";
-		 hrdisp.innerHTML = genesis.hours + "<br> Hours";
-		 mindisp.innerHTML = genesis.minutes + "<br> Minutes";
-		 secdisp.innerHTML = genesis.seconds + "<br> Seconds";
-	}
-
-	function updateClock(){
-		if(!(t>0)){
-			 clearInterval(timer);
-			 return ;
-		}
-	 t-=1000;
-	 render(doMath());
 	}
 
 	function getCurrentTime() {
@@ -37,16 +11,27 @@ var TIMER= (function () {
 	}
 
 
-	function init(date, day, hour, min, sec) {
-		daydisp = sel(day);
-		hrdisp = sel(hour);
-		mindisp = sel(min);
-		secdisp = sel(sec);
+	function init(date) {
 		destination = date;
 		current = getCurrentTime();
 		t = destination - current;
-		timer = setInterval(updateClock, 1000);
+		$(document).ready(function() {
+			clock = $('.clock').FlipClock({
+		        clockFace: 'DailyCounter',
+		        autoStart: false,
+		        callbacks: {
+		        	// stop: function() {
+		        	// 	$('.message').html('The clock has stopped!')
+		        	// }
+		        }
+		    });
+				    
+		    clock.setTime(t/1000);
+		    clock.setCountdown(true);
+		    clock.start();
 
+		});
+		
 	}
 
 
@@ -54,4 +39,7 @@ var TIMER= (function () {
 		initialize: init
 	}
 })();
-TIMER.initialize(new Date(2019,2,7),"#dayspan","#hrspan","#minspan","#secspan");
+TIMER.initialize(new Date(2019,2,7));
+
+		
+		

@@ -1,4 +1,3 @@
-
 @font-face{
     src: url("./Loguetown.ttf");
     font-family: "Loguetown";
@@ -28,7 +27,7 @@ body {
 .filler{
     align-self: flex-start;
     padding-top:18%;
-    padding-left: 7%;
+   /* padding-left: 7%;*/
     text-align: center;
 }
 
